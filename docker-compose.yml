@@ -1,0 +1,40 @@
+version: '3.1'
+volumes:
+  myData:
+    external: true
+
+services:
+  nginx-proxy:
+      image: jwilder/nginx-proxy
+      ports:
+        - "80:80"
+      volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+  web:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - ./public:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    expose:
+      - 80
+    environment:
+      - NGINX_PORT=80
+      - VIRTUAL_HOST=dataprod
+  db:
+    image: postgres:15.1-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=root 
+      - POSTGRES_PASSWORD=Qwerty123 #use another password
+      - POSTGRES_DB=mantenimiento #database name
+    ports:
+      - 5432:5432
+    volumes:
+      - myData:/var/lib/postgresql/data
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
