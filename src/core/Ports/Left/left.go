@@ -25,5 +25,5 @@ func InjectApi(api API) {
 		_api = api
 		return
 	}
-	fmt.Println(color.YellowString("WARN: API has been provided"))
+	fmt.Println(color.YellowString("WARN: API has been already provided!"))
 }

@@ -22,5 +22,5 @@ func InjectDB(db *gorm.DB) {
 		database = db
 		return
 	}
-	fmt.Println(color.YellowString("WARN: Database has been provided"))
+	fmt.Println(color.YellowString("WARN: Database has been already provided!"))
 }
