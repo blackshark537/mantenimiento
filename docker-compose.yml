@@ -11,6 +11,8 @@ services:
       volumes:
         - /var/run/docker.sock:/tmp/docker.sock:ro
   web:
+    depends_on:
+      - nginx-proxy
     image: nginx
     restart: unless-stopped
     volumes:
@@ -34,6 +36,8 @@ services:
       - myData:/var/lib/postgresql/data
     
   adminer:
+    depends_on:
+      - db
     image: adminer
     restart: always
     ports:
