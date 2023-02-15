@@ -18,7 +18,7 @@ type Componente struct {
 	Serie          string         `json:"serie" gorm:"index; not null"`
 	Descripcion    string         `json:"descripcion"`
 	VidaUtil       int            `json:"vida_util" gorm:"not null"`
-	ComponenteType ComponenteType `json:"componente_type" gorm:"foreignKey:ComponenteId; not null"`
+	ComponenteType ComponenteType `json:"componente_type" gorm:"foreignKey:ComponenteId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt      time.Time      `json:"created_at" gorm:"autoCreateTime"`
 	Owner          string         `json:"owner" gorm:"not null"`
 }

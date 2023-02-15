@@ -17,8 +17,8 @@ type Equipo struct {
 	Modelo      string       `json:"modelo" gorm:"index; not null"`
 	Serie       string       `json:"serie" gorm:"index; not null"`
 	Descripcion string       `json:"descripcion"`
-	EquipoType  EquipoType   `json:"equipo_type" gorm:"foreignKey:EquipoId; not null"`
-	Componentes []Componente `json:"componentes" gorm:"foreignKey:EquipoId"`
+	EquipoType  EquipoType   `json:"equipo_type" gorm:"foreignKey:EquipoId; not null; constraint:OnDelete:CASCADE"`
+	Componentes []Componente `json:"componentes" gorm:"foreignKey:EquipoId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time    `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string       `json:"owner" gorm:"not null"`
 }

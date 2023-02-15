@@ -7,6 +7,8 @@ const (
 	ListUser
 	CreateUser
 	UpdateUser
+	DeleteUser
+	ClearUsers
 	ChangePswd
 
 	GetEmpresas = iota
@@ -15,6 +17,7 @@ const (
 	CreateEmpresa
 	UpdateEmpresa
 	DeleteEmpresa
+	ClearEmpresas
 
 	GetAllContactos = iota
 	GetContacto
@@ -22,6 +25,7 @@ const (
 	CreateContacto
 	UpdateContacto
 	DeleteContacto
+	ClearContactos
 
 	GetAllGeo = iota
 	GetGeo
@@ -29,6 +33,7 @@ const (
 	CreateGeo
 	UpdateGeo
 	DeleteGeo
+	ClearGeo
 
 	GetAllAreaType = iota
 	GetAreaType
@@ -36,6 +41,7 @@ const (
 	CreateAreaType
 	UpdateAreaType
 	DeleteAreaType
+	ClearAreaTypes
 
 	GetAllAreas = iota
 	GetArea
@@ -43,6 +49,7 @@ const (
 	CreateArea
 	UpdateArea
 	DeleteArea
+	ClearAreas
 
 	GetAllEquipoType = iota
 	GetEquipoType
@@ -50,6 +57,7 @@ const (
 	CreateEquipoType
 	UpdateEquipoType
 	DeleteEquipoType
+	ClearEquipoType
 
 	GetAllEquipos = iota
 	GetEquipo
@@ -57,6 +65,7 @@ const (
 	CreateEquipo
 	UpdateEquipo
 	DeleteEquipo
+	ClearEquipos
 
 	GetAllComponentesType = iota
 	GetComponenteType
@@ -64,6 +73,7 @@ const (
 	CreateComponenteType
 	UpdateComponenteType
 	DeleteComponenteType
+	ClearCompoenteTypes
 
 	GetAllComponentes = iota
 	GetComponente
@@ -71,4 +81,5 @@ const (
 	CreateComponente
 	UpdateComponente
 	DeleteComponente
+	ClearComponentes
 )

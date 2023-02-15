@@ -10,8 +10,8 @@ type Suplidor struct {
 	Id          int         `json:"id" gorm:"primary_key"`
 	Nombre      string      `json:"nombre" gorm:"index; not null"`
 	Direccion   string      `json:"direccion" gorm:"not null"`
-	Contactos   []Contacto  `json:"contactos" gorm:"foreignKey:EmpresaId;"`
-	Ingrediente Ingrediente `json:"ingrediente" gorm:"foreignKey:SuplidorId; not null"`
+	Contactos   []Contacto  `json:"contactos" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
+	Ingrediente Ingrediente `json:"ingrediente" gorm:"foreignKey:SuplidorId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time   `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string      `json:"owner" gorm:"not null"`
 }

@@ -1,6 +1,8 @@
 package entities
 
 import (
+	"fmt"
+
 	rightPort "github.com/blackshark537/mantenimiento/src/core/Ports/Right"
 	"gorm.io/gorm"
 )
@@ -28,4 +30,9 @@ func (e *Entity[t]) Update() error {
 
 func (e *Entity[t]) Delete() error {
 	return rightPort.GetDB().Model(e.Entity).Delete(&e.Entity).Error
+}
+
+func (e *Entity[t]) Clear(table string) error {
+	sql := fmt.Sprintf("DELETE FROM %s;", table)
+	return rightPort.GetDB().Exec(sql).Error
 }

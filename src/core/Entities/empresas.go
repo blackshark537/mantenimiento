@@ -14,12 +14,12 @@ import (
 type Empresa struct {
 	Id          uint        `json:"id" gorm:"primary_key"`
 	Nombre      string      `json:"nombre" gorm:"index; not null"`
-	Contactos   []Contacto  `json:"contactos" gorm:"foreignKey:EmpresaId"`
+	Contactos   []Contacto  `json:"contactos" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
 	Direccion   string      `json:"direccion" gorm:"index; not null"`
 	Provincia   string      `json:"provincia" gorm:"index; not null"`
 	Email       string      `json:"email"`
-	Geoposicion Geoposicion `json:"geoposicion" gorm:"foreignKey:EmpresaId; not null"`
-	Areas       []Area      `json:"areas" gorm:"foreignKey:EmpresaId"`
+	Geoposicion Geoposicion `json:"geoposicion" gorm:"foreignKey:EmpresaId; not null; constraint:OnDelete:CASCADE"`
+	Areas       []Area      `json:"areas" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time   `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string      `json:"owner" gorm:"not null"`
 }

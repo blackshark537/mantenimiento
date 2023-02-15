@@ -68,13 +68,13 @@ var Commands []*cli.Command = []*cli.Command{
 	{
 		Name:    "migrate",
 		Aliases: []string{"m"},
-		Usage:   "Execute Migration",
+		Usage:   "Execute Auto Migration",
 		Action:  migrate,
 	},
 	{
 		Name:    "list",
 		Aliases: []string{"ls"},
-		Usage:   "Show a table list",
+		Usage:   "Show a list of a given table",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:        "from",
@@ -95,7 +95,7 @@ var Commands []*cli.Command = []*cli.Command{
 	},
 	{
 		Name:    "insert",
-		Aliases: []string{"in"},
+		Aliases: []string{"i"},
 		Usage:   "Create a new register",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
@@ -114,6 +114,21 @@ var Commands []*cli.Command = []*cli.Command{
 			},
 		},
 		Action: createEntity,
+	},
+	{
+		Name:    "clear",
+		Aliases: []string{"clr"},
+		Usage:   "Clear all registers from a given table",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:        "from",
+				Usage:       "Database Table",
+				Aliases:     []string{"f"},
+				Destination: &table,
+				Required:    true,
+			},
+		},
+		Action: clearEntity,
 	},
 }
 
@@ -233,7 +248,55 @@ func createEntity(cli *cli.Context) error {
 		return typesAvailable()
 	}
 	action.Payload = []byte(data)
-	return action.Exec()
+	err := action.Exec()
+	if err == nil {
+		fmt.Printf("%s creado con exito!\n", table)
+	}
+	return err
+}
+
+func clearEntity(ctx *cli.Context) error {
+	action := Core.Action{}
+
+	switch table {
+	case users:
+		action.OfType = actions.ClearUsers
+		break
+	case empresas:
+		action.OfType = actions.ClearEmpresas
+		break
+	case contactos:
+		action.OfType = actions.ClearContactos
+		break
+	case geopoints:
+		action.OfType = actions.ClearGeo
+		break
+	case areas_types:
+		action.OfType = actions.ClearAreaTypes
+		break
+	case areas:
+		action.OfType = actions.ClearAreas
+		break
+	case equipos_types:
+		action.OfType = actions.ClearEquipoType
+		break
+	case equipos:
+		action.OfType = actions.ClearEquipos
+		break
+	case componentes_types:
+		action.OfType = actions.ClearCompoenteTypes
+		break
+	case componentes:
+		action.OfType = actions.ClearComponentes
+		break
+	default:
+		return typesAvailable()
+	}
+	err := action.Exec()
+	if err == nil {
+		fmt.Printf("Todos los registros de la tabla %s, han sido borrados con exito!\n", table)
+	}
+	return err
 }
 
 func typesAvailable() error {

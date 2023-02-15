@@ -17,8 +17,8 @@ type Area struct {
 	Largo       float32   `json:"largo" gorm:"not null"`
 	Ancho       float32   `json:"ancho" gorm:"not null"`
 	EmpresaId   uint      `json:"empresa_id" gorm:"not null"`
-	AreaType    AreaType  `json:"area_type" gorm:"foreignKey:AreaId; not null"`
-	Equipos     []Equipo  `json:"equipos" gorm:"foreignKey:AreaId;"`
+	AreaType    AreaType  `json:"area_type" gorm:"foreignKey:AreaId; not null; constraint:OnDelete:CASCADE"`
+	Equipos     []Equipo  `json:"equipos" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string    `json:"owner" gorm:"not null"`
 }
