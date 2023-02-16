@@ -136,7 +136,7 @@ func New() *cli.App {
 
 	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Maintenance"))
 	AppArch := color.MagentaString(fmt.Sprintf("Core Arch: %v", runtime.GOARCH))
-	AppDesc := color.MagentaString("A simple CLI system to manage predictive maintenance")
+	AppDesc := color.MagentaString("A simple CLI system to manage preventive maintenance")
 
 	website := color.CyanString("WEBSITE: https://dataprod.cloud")
 	support := color.GreenString("SUPPORT: support@dataprod.cloud")
