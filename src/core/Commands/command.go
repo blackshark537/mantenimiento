@@ -13,7 +13,7 @@ import (
 func Exec(ofType int, payload []byte) error {
 	switch ofType {
 	case actions.ServerStart:
-		return left.Serve()
+		return left.Serve(string(payload[:]))
 
 		// Users
 	case actions.ListUser:

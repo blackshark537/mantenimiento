@@ -10,7 +10,7 @@ import (
 )
 
 type API interface {
-	ForRoot() error
+	ForRoot(port string) error
 }
 
 type Action struct {

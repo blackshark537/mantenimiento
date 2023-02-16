@@ -13,8 +13,8 @@ echo "Migrando Database..."
 ./bin/mantenimiento migrate
 echo ""
 echo "Usuarios"
-./bin/mantenimiento i -to users -d '{"nombre": "luis", "email": "luis@me.com", "password": "Qwerty123"}'
-./bin/mantenimiento ls -f users
+./bin/mantenimiento i -to usuarios -d '{"nombre": "luis", "email": "luis@me.com", "password": "Qwerty123"}'
+./bin/mantenimiento ls -f usuarios
 echo ""
 echo "Empresas"
 ./bin/mantenimiento i -to empresas -d '{"nombre": "flander y asociados", "email": "luis@me.com", "direccion": "Ave. Siempre viva", "provincia Springfield", "owner": "luis@me.com"}'
@@ -52,9 +52,9 @@ echo "Tipos De Componentes"
 ./bin/mantenimiento i -to componentes_types -d '{"componente_id": 1, "nombre": "nombre del componente", "owner": "luis@me.com"}'
 ./bin/mantenimiento ls -f componentes_types
 echo ""
-echo "Iniciando Servidor en puerto 8080"
-./bin/mantenimiento s -p 8080
-echo ""
+#echo "Iniciando Servidor en puerto 8080"
+#./bin/mantenimiento s -p 8080
+#echo ""
 echo "Borrando datos..."
 echo ""
 ./bin/mantenimiento clr -f componentes_types
@@ -75,7 +75,7 @@ echo ""
 echo ""
 ./bin/mantenimiento clr -f componentes
 echo ""
-./bin/mantenimiento clr -f users
+./bin/mantenimiento clr -f usuarios
 echo ""
 echo "Apagandp Docker"
 make down

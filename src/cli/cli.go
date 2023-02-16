@@ -33,7 +33,7 @@ const (
 	equipos           = "equipos"
 	componentes_types = "componentes_types"
 	componentes       = "componentes"
-	users             = "users"
+	users             = "usuarios"
 )
 
 var tables = []string{
@@ -210,7 +210,10 @@ func migrate(ctx *cli.Context) error {
 }
 
 func serverStart(ctx *cli.Context) error {
-	action := Core.Action{}
+	action := Core.Action{
+		OfType:  actions.ServerStart,
+		Payload: []byte(port),
+	}
 	return action.Exec()
 }
 

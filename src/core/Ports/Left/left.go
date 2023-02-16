@@ -8,16 +8,16 @@ import (
 )
 
 type API interface {
-	ForRoot() error
+	ForRoot(port string) error
 }
 
 var _api API = nil
 
-func Serve() error {
+func Serve(port string) error {
 	if _api == nil {
 		return errors.New(color.RedString("Error: API Provider Null"))
 	}
-	return _api.ForRoot()
+	return _api.ForRoot(port)
 }
 
 func InjectApi(api API) {

@@ -17,7 +17,7 @@ type Area struct {
 	Largo       float32   `json:"largo" gorm:"not null"`
 	Ancho       float32   `json:"ancho" gorm:"not null"`
 	EmpresaId   uint      `json:"empresa_id" gorm:"not null"`
-	AreaType    AreaType  `json:"area_type" gorm:"foreignKey:AreaId; not null; constraint:OnDelete:CASCADE"`
+	AreaId      uint      `json:"area_id" gorm:"not null"`
 	Equipos     []Equipo  `json:"equipos" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string    `json:"owner" gorm:"not null"`
@@ -35,7 +35,7 @@ func (area *Area) Migrate() {
 func (area *Area) List(filter []byte) error {
 	t := new(Entity[Area])
 	json.Unmarshal(filter, area)
-	err := t.GetAll().Where(area).Preload("Equipos").Preload("AreaType").Limit(25).Find(&t.Entities).Error
+	err := t.GetAll().Where(area).Preload("Equipos").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Area", "Descipcion", "Capacidad", "No.Equipos", "Ancho", "Largo")
@@ -43,7 +43,7 @@ func (area *Area) List(filter []byte) error {
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 	for _, el := range t.Entities {
 
-		tbl.AddRow(el.Id, el.AreaType.Nombre, el.Descripcion, el.Capacidad, len(el.Equipos), el.Ancho, el.Largo)
+		tbl.AddRow(el.Id, el.AreaId, el.Descripcion, el.Capacidad, len(el.Equipos), el.Ancho, el.Largo)
 	}
 	tbl.Print()
 	return err

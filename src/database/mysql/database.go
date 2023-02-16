@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func DB() *gorm.DB {
+func NewDB() *gorm.DB {
 	dsn := "root:Qwerty123@tcp(127.0.0.1:5432)/mantenimiento"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	handleError(err)
