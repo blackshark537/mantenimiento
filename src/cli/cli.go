@@ -134,17 +134,17 @@ var Commands []*cli.Command = []*cli.Command{
 
 func New() *cli.App {
 
-	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Mantenimiento"))
+	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Maintenance"))
 	AppArch := color.MagentaString(fmt.Sprintf("Core Arch: %v", runtime.GOARCH))
-	AppDesc := color.MagentaString("A simple CLI program to manage your Mantenimiento system")
+	AppDesc := color.MagentaString("A simple CLI system to manage predictive maintenance")
 
 	website := color.CyanString("WEBSITE: https://dataprod.cloud")
 	support := color.GreenString("SUPPORT: support@dataprod.cloud")
 	cli.AppHelpTemplate = fmt.Sprintf(`
-	                       _____________________________________________________
+	                     _____________________________________________________
                       |                                                     |
              _______  |                                                     |
-            / _____ | |           %s                  |
+            / _____ | |           %s                    |
            / /(__) || |           %s                          |
   ________/ / |OO| || |                                                     |
  |         |-------|| |                                                     |
@@ -154,13 +154,41 @@ func New() *cli.App {
 \|| /  \ |_______________| /  \ |_| /  \ |__| |___________| /  \ |__| /  \|_|/
    | () |                 | () |   | () |                  | () |    | () |
     \__/                   \__/     \__/                    \__/      \__/
-	%s
+
+%s
+ENTITIES AVAILABLE:
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
+	- %s
 
 	%s
 	
 	%s
 	
-	`, AppName, AppArch, cli.AppHelpTemplate, website, support)
+	`,
+		AppName,
+		AppArch,
+		cli.AppHelpTemplate,
+		users,
+		empresas,
+		contactos,
+		geopoints,
+		areas,
+		areas_types,
+		equipos,
+		equipos_types,
+		componentes,
+		componentes_types,
+		website,
+		support,
+	)
 
 	cli.VersionFlag = &cli.BoolFlag{
 		Name:    "print-version",
