@@ -133,24 +133,40 @@ var Commands []*cli.Command = []*cli.Command{
 }
 
 func New() *cli.App {
+
+	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Mantenimiento"))
+	AppArch := color.MagentaString(fmt.Sprintf("Core Arch: %v", runtime.GOARCH))
+	AppDesc := color.MagentaString("A simple CLI program to manage your Mantenimiento system")
+
 	website := color.CyanString("WEBSITE: https://dataprod.cloud")
 	support := color.GreenString("SUPPORT: support@dataprod.cloud")
-	cli.AppHelpTemplate = fmt.Sprintf(`%s
+	cli.AppHelpTemplate = fmt.Sprintf(`
+	                       _____________________________________________________
+                      |                                                     |
+             _______  |                                                     |
+            / _____ | |           %s                  |
+           / /(__) || |           %s                          |
+  ________/ / |OO| || |                                                     |
+ |         |-------|| |                                                     |
+(|         |     -.|| |_______________________                              |
+ |  ____   \       ||_________||____________  |             ____      ____  |
+/| / __ \   |______||     / __ \   / __ \   | |            / __ \    / __ \ |\
+\|| /  \ |_______________| /  \ |_| /  \ |__| |___________| /  \ |__| /  \|_|/
+   | () |                 | () |   | () |                  | () |    | () |
+    \__/                   \__/     \__/                    \__/      \__/
+	%s
 
 	%s
 	
 	%s
 	
-	`, cli.AppHelpTemplate, website, support)
+	`, AppName, AppArch, cli.AppHelpTemplate, website, support)
 
 	cli.VersionFlag = &cli.BoolFlag{
 		Name:    "print-version",
 		Aliases: []string{"v"},
 		Usage:   "print only the version",
 	}
-
-	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Mantenimiento : Core Arch: %v", runtime.GOARCH))
-	AppDesc := color.MagentaString("A simple CLI program to manage your Dataprod - Mantenimiento system")
 
 	return &cli.App{
 		Name:     AppName,
