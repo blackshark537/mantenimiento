@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/blackshark537/mantenimiento/src/api/auth"
 	"github.com/blackshark537/mantenimiento/src/api/handlers"
+
 	"github.com/blackshark537/mantenimiento/src/api/middlewares"
 	"github.com/gofiber/fiber/v2"
 )
@@ -24,6 +25,18 @@ func ForRoot(app *fiber.App) {
 	empresas.Get("/", handlers.ReadEmpresa)
 	empresas.Put("/:id", handlers.UpdateEmpresa)
 	empresas.Delete("/:id", handlers.DeleteEmpresa)
+
+	contactos := v1.Group("/contactos")
+	contactos.Post("/", handlers.CreateContato)
+	contactos.Get("/", handlers.ReadContato)
+	contactos.Put("/:id", handlers.UpdateContato)
+	contactos.Delete("/:id", handlers.DeleteContato)
+
+	geopoints := v1.Group("/geopoints")
+	geopoints.Post("/", handlers.CreateGeopoint)
+	geopoints.Get("/", handlers.ReadGeopoint)
+	geopoints.Put("/:id", handlers.UpdateGeopoint)
+	geopoints.Delete("/:id", handlers.DeleteGeopoint)
 
 	suplidores := v1.Group("/suplidores")
 	suplidores.Post("/", handlers.CreateSuplidor)

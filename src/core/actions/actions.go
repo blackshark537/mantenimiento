@@ -11,8 +11,7 @@ const (
 	ClearUsers
 	ChangePswd
 
-	GetEmpresas = iota
-	GetEmpresa
+	GetAllEmpresas = iota
 	ListEmpresa
 	CreateEmpresa
 	UpdateEmpresa

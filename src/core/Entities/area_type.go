@@ -13,7 +13,7 @@ import (
 type AreaType struct {
 	Id        int       `json:"id" gorm:"primary_key"`
 	Nombre    string    `json:"nombre" gorm:"index; not null"`
-	Areas     []Area    `json:"area_type" gorm:"foreignKey:AreaId; not null; constraint:OnDelete:CASCADE"`
+	Areas     []Area    `json:"areas" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner     string    `json:"owner" gorm:"not null"`
 }

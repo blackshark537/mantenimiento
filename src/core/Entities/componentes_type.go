@@ -13,7 +13,7 @@ import (
 type ComponenteType struct {
 	Id          int          `json:"id" gorm:"primary_key"`
 	Nombre      string       `json:"nombre" gorm:"index; not null"`
-	Componentes []Componente `json:"componente_type" gorm:"foreignKey:ComponenteId; not null; constraint:OnDelete:CASCADE"`
+	Componentes []Componente `json:"componentes" gorm:"foreignKey:ComponenteId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time    `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string       `json:"owner" gorm:"not null"`
 }

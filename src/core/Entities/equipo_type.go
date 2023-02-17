@@ -13,7 +13,7 @@ import (
 type EquipoType struct {
 	Id        int       `json:"id" gorm:"primary_key"`
 	Nombre    string    `json:"nombre" gorm:"index; not null"`
-	Equipos   []Equipo  `json:"equipo_type" gorm:"foreignKey:EquipoId; not null; constraint:OnDelete:CASCADE"`
+	Equipos   []Equipo  `json:"equipos" gorm:"foreignKey:EquipoId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner     string    `json:"owner" gorm:"not null"`
 }

@@ -30,7 +30,7 @@ func (a *Action) Exec() error {
 	return Commands.Exec(a.OfType, a.Payload)
 }
 
-func (a *Action) Query() ([]interface{}, error) {
+func (a *Action) Query() (interface{}, error) {
 	return Query.Exec(a.OfType, a.Payload)
 }
 
