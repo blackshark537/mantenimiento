@@ -8,8 +8,16 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewDB() *gorm.DB {
-	dsn := fmt.Sprintf("host=localhost user=root password=Qwerty123 dbname=mantenimiento port=5432 sslmode=disable")
+type DBConfig struct {
+	Host string
+	User string
+	Pass string
+	Name string
+	Port string
+}
+
+func (c *DBConfig) NewDB() *gorm.DB {
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", c.Host, c.User, c.Pass, c.Name, c.Port)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	handleError(err)
 	return db

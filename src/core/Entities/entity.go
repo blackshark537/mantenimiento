@@ -1,6 +1,7 @@
 package entities
 
 import (
+	"encoding/json"
 	"fmt"
 
 	rightPort "github.com/blackshark537/mantenimiento/src/core/Ports/Right"
@@ -8,12 +9,14 @@ import (
 )
 
 type Entity[t interface{}] struct {
+	Data     []byte
 	Entity   t
 	Entities []t
 }
 
 func (e *Entity[t]) GetAll() *gorm.DB {
-	return rightPort.GetDB().Model(e.Entity)
+	json.Unmarshal(e.Data, &e.Entity)
+	return rightPort.GetDB().Model(e.Entity).Where(e.Entity)
 }
 
 func (e *Entity[t]) GetOne(key string, value interface{}) *gorm.DB {
@@ -21,14 +24,17 @@ func (e *Entity[t]) GetOne(key string, value interface{}) *gorm.DB {
 }
 
 func (e *Entity[t]) Create() error {
+	json.Unmarshal(e.Data, &e.Entity)
 	return rightPort.GetDB().Model(e.Entity).Create(&e.Entity).Error
 }
 
 func (e *Entity[t]) Update() error {
+	json.Unmarshal(e.Data, &e.Entity)
 	return rightPort.GetDB().Model(e.Entity).Updates(&e.Entity).Error
 }
 
 func (e *Entity[t]) Delete() error {
+	json.Unmarshal(e.Data, &e.Entity)
 	return rightPort.GetDB().Model(e.Entity).Delete(&e.Entity).Error
 }
 

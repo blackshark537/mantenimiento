@@ -11,8 +11,14 @@ import (
 )
 
 func main() {
-	db := postgres.NewDB()
-	core.InjectDatabase(db)
+	dbConfig := postgres.DBConfig{
+		Host: os.Getenv("DB_HOST"),
+		User: os.Getenv("DB_USER"),
+		Pass: os.Getenv("DB_PASS"),
+		Name: os.Getenv("DB_NAME"),
+		Port: os.Getenv("DB_PORT"),
+	}
+	core.InjectDatabase(dbConfig.NewDB())
 
 	api := fiberApi.NewApi()
 	core.InjectApi(api)

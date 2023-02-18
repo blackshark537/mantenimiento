@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -13,7 +12,8 @@ import (
 type AreaType struct {
 	Id        int       `json:"id" gorm:"primary_key"`
 	Nombre    string    `json:"nombre" gorm:"index; not null"`
-	Areas     []Area    `json:"areas" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
+	EmpresaId uint      `json:"empresa_id" gorm:"not null"`
+	Areas     []Area    `json:"areas" gorm:"foreignKey:AreaTypeId; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner     string    `json:"owner" gorm:"not null"`
 }
@@ -29,8 +29,8 @@ func (atp *AreaType) Migrate() {
 
 func (area *AreaType) List(filter []byte) error {
 	t := new(Entity[AreaType])
-	json.Unmarshal(filter, area)
-	err := t.GetAll().Where(area).Preload("Areas").Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Preload("Areas").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Nombre", "Camtidad")

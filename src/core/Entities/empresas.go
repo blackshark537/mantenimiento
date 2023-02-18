@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -19,7 +18,7 @@ type Empresa struct {
 	Provincia   string      `json:"provincia" gorm:"index; not null"`
 	Email       string      `json:"email"`
 	Geoposicion Geoposicion `json:"geoposicion" gorm:"foreignKey:EmpresaId; not null; constraint:OnDelete:CASCADE"`
-	Areas       []Area      `json:"areas" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
+	Areas       []AreaType  `json:"areas" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time   `json:"created_at" gorm:"autoCreateTime"`
 	Owner       string      `json:"owner" gorm:"not null"`
 }
@@ -35,8 +34,8 @@ func (e *Empresa) Migrate() {
 
 func (e *Empresa) List(filter []byte) error {
 	t := new(Entity[Empresa])
-	json.Unmarshal(filter, e)
-	err := t.GetAll().Where(e).Preload("Contactos").Preload("Geoposicion").Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Preload("Contactos").Preload("Geoposicion").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Nombre", "Email", "Telefono", "Lugar", "Direccion", "Provincia", "Lat", "Lng")

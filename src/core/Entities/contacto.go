@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -47,8 +46,8 @@ func (cto *Contacto) CreateTypes() {
 
 func (cto *Contacto) List(filter []byte) error {
 	t := new(Entity[Contacto])
-	json.Unmarshal(filter, cto)
-	err := t.GetAll().Where(cto).Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "EmpresaId", "Teléfono", "Tipo")

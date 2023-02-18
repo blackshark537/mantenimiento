@@ -47,23 +47,23 @@ func Migrate() {
 	cto := entities.Contacto{}
 	cto.Migrate()
 
-	area := entities.Area{}
-	area.Migrate()
-
 	areaType := entities.AreaType{}
 	areaType.Migrate()
 
-	eqp := entities.Equipo{}
-	eqp.Migrate()
+	area := entities.Area{}
+	area.Migrate()
 
 	eqpType := entities.EquipoType{}
 	eqpType.Migrate()
 
-	cmp := entities.Componente{}
-	cmp.Migrate()
+	eqp := entities.Equipo{}
+	eqp.Migrate()
 
 	cmpType := entities.ComponenteType{}
 	cmpType.Migrate()
+
+	cmp := entities.Componente{}
+	cmp.Migrate()
 
 	alm := entities.Alimento{}
 	alm.Migrate()

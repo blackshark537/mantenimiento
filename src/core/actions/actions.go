@@ -3,37 +3,6 @@ package actions
 const (
 	ServerStart = iota
 
-	GetUser = iota
-	ListUser
-	CreateUser
-	UpdateUser
-	DeleteUser
-	ClearUsers
-	ChangePswd
-
-	GetAllEmpresas = iota
-	ListEmpresa
-	CreateEmpresa
-	UpdateEmpresa
-	DeleteEmpresa
-	ClearEmpresas
-
-	GetAllContactos = iota
-	GetContacto
-	ListContacto
-	CreateContacto
-	UpdateContacto
-	DeleteContacto
-	ClearContactos
-
-	GetAllGeo = iota
-	GetGeo
-	ListGeo
-	CreateGeo
-	UpdateGeo
-	DeleteGeo
-	ClearGeo
-
 	GetAllAreaType = iota
 	GetAreaType
 	ListAreaType

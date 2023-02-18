@@ -28,13 +28,13 @@ echo "Geopocisiones"
 ./bin/mantenimiento i -to geopoints -d '{"empresa_id": 1, "lat": 87.0000, "lng": 78.0000, "owner": "luis@me.com"}'
 ./bin/mantenimiento ls -f geopoints
 echo ""
-echo "Areas"
-./bin/mantenimiento i -to areas -d '{"empresa_id": 1, "descripcion": "Descripcion del area", "capacidad": 1000, "largo": 300, "ancho": 100, "owner": "luis@me.com"}'
-./bin/mantenimiento ls -f areas
-echo ""
 echo "Tipos De Areas"
-./bin/mantenimiento i -to areas_types -d '{"area_id": 1, "nombre": "nombre del area", "owner": "luis@me.com"}'
+./bin/mantenimiento i -to areas_types -d '{"empresa_id": 1, "nombre": "nombre del area", "owner": "luis@me.com"}'
 ./bin/mantenimiento ls -f areas_types
+echo ""
+echo "Areas"
+./bin/mantenimiento i -to areas -d '{"area_id": 1, "descripcion": "Descripcion del area", "capacidad": 1000, "largo": 300, "ancho": 100, "owner": "luis@me.com"}'
+./bin/mantenimiento ls -f areas
 echo ""
 echo "Equipos"
 ./bin/mantenimiento i -to equipos -d '{"area_id": 1, "marca": "marca del equipo", "modelo": "modelo del equipo", "serie": "Serie del equipo", "descripcion": "descripcion del equipo", "owner": "luis@me.com"}'

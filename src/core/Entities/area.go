@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -11,16 +10,15 @@ import (
 )
 
 type Area struct {
-	Id          int       `json:"id" gorm:"primary_key"`
-	Descripcion string    `json:"descripcion" gorm:"not null"`
-	Capacidad   int       `json:"capacidad" gorm:"index; not null"`
-	Largo       float32   `json:"largo" gorm:"not null"`
-	Ancho       float32   `json:"ancho" gorm:"not null"`
-	EmpresaId   uint      `json:"empresa_id" gorm:"not null"`
-	AreaId      uint      `json:"area_id" gorm:"not null"`
-	Equipos     []Equipo  `json:"equipos" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
-	CreatedAt   time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner       string    `json:"owner" gorm:"not null"`
+	Id          int          `json:"id" gorm:"primary_key"`
+	Descripcion string       `json:"descripcion" gorm:"not null"`
+	Capacidad   int          `json:"capacidad" gorm:"index; not null"`
+	Largo       float32      `json:"largo" gorm:"not null"`
+	Ancho       float32      `json:"ancho" gorm:"not null"`
+	AreaTypeId  uint         `json:"area_type_id" gorm:"not null"`
+	Equipos     []EquipoType `json:"equipos" gorm:"foreignKey:AreaId; constraint:OnDelete:CASCADE"`
+	CreatedAt   time.Time    `json:"created_at" gorm:"autoCreateTime"`
+	Owner       string       `json:"owner" gorm:"not null"`
 }
 
 func (area *Area) Migrate() {
@@ -34,8 +32,8 @@ func (area *Area) Migrate() {
 
 func (area *Area) List(filter []byte) error {
 	t := new(Entity[Area])
-	json.Unmarshal(filter, area)
-	err := t.GetAll().Where(area).Preload("Equipos").Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Preload("Equipos").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Area", "Descipcion", "Capacidad", "No.Equipos", "Ancho", "Largo")
@@ -43,7 +41,7 @@ func (area *Area) List(filter []byte) error {
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 	for _, el := range t.Entities {
 
-		tbl.AddRow(el.Id, el.AreaId, el.Descripcion, el.Capacidad, len(el.Equipos), el.Ancho, el.Largo)
+		tbl.AddRow(el.Id, el.AreaTypeId, el.Descripcion, el.Capacidad, len(el.Equipos), el.Ancho, el.Largo)
 	}
 	tbl.Print()
 	return err

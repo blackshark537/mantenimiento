@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -31,8 +30,8 @@ func (usr *User) Migrate() {
 
 func (user *User) List(filter []byte) error {
 	t := new(Entity[User])
-	json.Unmarshal(filter, user)
-	err := t.GetAll().Where(user).Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Nombre", "Email", "CreatedAt")

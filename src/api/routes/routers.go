@@ -4,7 +4,6 @@ import (
 	"github.com/blackshark537/mantenimiento/src/api/auth"
 	"github.com/blackshark537/mantenimiento/src/api/handlers"
 
-	"github.com/blackshark537/mantenimiento/src/api/middlewares"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,36 +12,7 @@ func ForRoot(app *fiber.App) {
 		return c.SendString("Welcome to DataProd - Preventive Maintanence")
 	})
 
-	_auth := app.Group("/auth")
-	_auth.Post("/login", middlewares.Logger, handlers.Login)
-	_auth.Post("/logout", middlewares.Logger, handlers.Logout)
-	_auth.Post("/register", middlewares.Logger, handlers.Register)
-
-	v1 := app.Group("/api/v1", middlewares.Logger, auth.Authorize)
-
-	empresas := v1.Group("/empresas")
-	empresas.Post("/", handlers.CreateEmpresa)
-	empresas.Get("/", handlers.ReadEmpresa)
-	empresas.Put("/:id", handlers.UpdateEmpresa)
-	empresas.Delete("/:id", handlers.DeleteEmpresa)
-
-	contactos := v1.Group("/contactos")
-	contactos.Post("/", handlers.CreateContato)
-	contactos.Get("/", handlers.ReadContato)
-	contactos.Put("/:id", handlers.UpdateContato)
-	contactos.Delete("/:id", handlers.DeleteContato)
-
-	geopoints := v1.Group("/geopoints")
-	geopoints.Post("/", handlers.CreateGeopoint)
-	geopoints.Get("/", handlers.ReadGeopoint)
-	geopoints.Put("/:id", handlers.UpdateGeopoint)
-	geopoints.Delete("/:id", handlers.DeleteGeopoint)
-
-	suplidores := v1.Group("/suplidores")
-	suplidores.Post("/", handlers.CreateSuplidor)
-	suplidores.Get("/", handlers.ReadSuplidor)
-	suplidores.Put("/:id", handlers.UpdateSuplidor)
-	suplidores.Delete("/:id", handlers.DeleteSuplidor)
+	v1 := app.Group("/api/v1", auth.Authorize)
 
 	areas := v1.Group("/areas")
 	areas.Post("/", handlers.CreateArea)

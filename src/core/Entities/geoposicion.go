@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -30,8 +29,8 @@ func (geo *Geoposicion) Migrate() {
 
 func (geo *Geoposicion) List(filter []byte) error {
 	t := new(Entity[Geoposicion])
-	json.Unmarshal(filter, geo)
-	err := t.GetAll().Where(geo).Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "EmpresaId", "Lat", "Lng")

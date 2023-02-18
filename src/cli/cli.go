@@ -24,23 +24,15 @@ var (
 )
 
 const (
-	empresas          = "empresas"
-	contactos         = "contactos"
-	geopoints         = "geopoints"
 	areas_types       = "areas_types"
 	areas             = "areas"
 	equipos_types     = "equipos_types"
 	equipos           = "equipos"
 	componentes_types = "componentes_types"
 	componentes       = "componentes"
-	users             = "usuarios"
 )
 
 var tables = []string{
-	users,
-	empresas,
-	contactos,
-	geopoints,
 	areas_types,
 	areas,
 	equipos,
@@ -163,11 +155,7 @@ ENTITIES AVAILABLE:
 	- %s
 	- %s
 	- %s
-	- %s
-	- %s
-	- %s
-	- %s
-
+	
 	%s
 	
 	%s
@@ -176,10 +164,6 @@ ENTITIES AVAILABLE:
 		AppName,
 		AppArch,
 		cli.AppHelpTemplate,
-		users,
-		empresas,
-		contactos,
-		geopoints,
 		areas,
 		areas_types,
 		equipos,
@@ -221,18 +205,6 @@ func listTable(ctx *cli.Context) error {
 	action := Core.Action{}
 
 	switch table {
-	case users:
-		action.OfType = actions.ListUser
-		break
-	case empresas:
-		action.OfType = actions.ListEmpresa
-		break
-	case contactos:
-		action.OfType = actions.ListContacto
-		break
-	case geopoints:
-		action.OfType = actions.ListGeo
-		break
 	case areas_types:
 		action.OfType = actions.ListAreaType
 		break
@@ -261,18 +233,6 @@ func listTable(ctx *cli.Context) error {
 func createEntity(cli *cli.Context) error {
 	action := Core.Action{}
 	switch table {
-	case users:
-		action.OfType = actions.CreateUser
-		break
-	case empresas:
-		action.OfType = actions.CreateEmpresa
-		break
-	case contactos:
-		action.OfType = actions.CreateContacto
-		break
-	case geopoints:
-		action.OfType = actions.CreateGeo
-		break
 	case areas_types:
 		action.OfType = actions.CreateAreaType
 		break
@@ -306,18 +266,6 @@ func clearEntity(ctx *cli.Context) error {
 	action := Core.Action{}
 
 	switch table {
-	case users:
-		action.OfType = actions.ClearUsers
-		break
-	case empresas:
-		action.OfType = actions.ClearEmpresas
-		break
-	case contactos:
-		action.OfType = actions.ClearContactos
-		break
-	case geopoints:
-		action.OfType = actions.ClearGeo
-		break
 	case areas_types:
 		action.OfType = actions.ClearAreaTypes
 		break

@@ -1,7 +1,6 @@
 package entities
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
@@ -13,7 +12,8 @@ import (
 type EquipoType struct {
 	Id        int       `json:"id" gorm:"primary_key"`
 	Nombre    string    `json:"nombre" gorm:"index; not null"`
-	Equipos   []Equipo  `json:"equipos" gorm:"foreignKey:EquipoId; not null; constraint:OnDelete:CASCADE"`
+	AreaId    uint      `json:"area_id" gorm:"not null"`
+	Equipos   []Equipo  `json:"equipos" gorm:"foreignKey:EquipoTypeId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Owner     string    `json:"owner" gorm:"not null"`
 }
@@ -29,8 +29,8 @@ func (equipo *EquipoType) Migrate() {
 
 func (equipo *EquipoType) List(filter []byte) error {
 	t := new(Entity[EquipoType])
-	json.Unmarshal(filter, equipo)
-	err := t.GetAll().Where(equipo).Preload("Equipos").Limit(25).Find(&t.Entities).Error
+	t.Data = filter
+	err := t.GetAll().Preload("Equipos").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 	tbl := table.New("ID", "Nombre", "Cantidad")
