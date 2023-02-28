@@ -14,6 +14,7 @@ type User struct {
 	Nombre    string    `json:"nombre" gorm:"not null"`
 	Email     string    `json:"email" gorm:"unique; not null"`
 	Password  string    `json:"password" gorm:"not null"`
+	Uid       string    `json:"uid,omitempty" gorm:"index; not null; unique"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
 

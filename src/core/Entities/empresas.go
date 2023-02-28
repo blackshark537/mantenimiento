@@ -20,7 +20,7 @@ type Empresa struct {
 	Geoposicion Geoposicion `json:"geoposicion" gorm:"foreignKey:EmpresaId; not null; constraint:OnDelete:CASCADE"`
 	Areas       []AreaType  `json:"areas" gorm:"foreignKey:EmpresaId; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time   `json:"created_at" gorm:"autoCreateTime"`
-	Owner       string      `json:"owner" gorm:"not null"`
+	Uid         string      `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (e *Empresa) Migrate() {

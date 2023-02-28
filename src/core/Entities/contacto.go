@@ -23,7 +23,7 @@ type Contacto struct {
 	Numero    string    `json:"numero" gorm:"index; not null"`
 	Tipo      string    `json:"tipo" gorm:"type:phone_type; not null; default:CASA"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner     string    `json:"owner" gorm:"not null"`
+	Uid       string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (cto *Contacto) Migrate() {

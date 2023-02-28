@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "src/auth";
+
+message Auth{
+    string token=1;
+}
+
+message GetAuthRequest { Auth auth = 1; }
+message AuthResponse{string isAuth = 1; }
+
+service Auths {
+    rpc IsAuth(GetAuthRequest) returns (AuthResponse){}
+}

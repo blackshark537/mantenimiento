@@ -18,7 +18,7 @@ type Componente struct {
 	VidaUtil         int       `json:"vida_util" gorm:"not null"`
 	ComponenteTypeId uint      `json:"componente_type_id" gorm:"not null"`
 	CreatedAt        time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner            string    `json:"owner" gorm:"not null"`
+	Uid              string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (cmp *Componente) Migrate() {

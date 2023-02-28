@@ -33,7 +33,7 @@ type Ingrediente struct {
 	Tipo         string    `json:"tipo" gorm:"type:tipo_ingrediente; not null; default:MICRO"`
 	SuplidorId   uint      `json:"suplidor_id" gorm:"not null"`
 	CreatedAt    time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner        string    `json:"owner" gorm:"not null"`
+	Uid          string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (ing *Ingrediente) Migrate() {

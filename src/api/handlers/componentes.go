@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	Core "github.com/blackshark537/mantenimiento/src/core"
 	"github.com/blackshark537/mantenimiento/src/core/actions"
 	"github.com/gofiber/fiber/v2"
@@ -12,6 +14,7 @@ func ReadComponente(c *fiber.Ctx) error {
 	action := Core.Action{
 		OfType:  actions.GetAllComponentes,
 		Payload: []byte(filter),
+		Uid:     fmt.Sprintf(`%s`, c.Locals("uid")),
 	}
 	res, err := action.Query()
 	if err != nil {
@@ -28,6 +31,7 @@ func ReadComponenteType(c *fiber.Ctx) error {
 	action := Core.Action{
 		OfType:  actions.GetAllComponentesType,
 		Payload: []byte(filter),
+		Uid:     fmt.Sprintf(`%s`, c.Locals("uid")),
 	}
 	res, err := action.Query()
 	if err != nil {

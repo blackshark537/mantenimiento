@@ -12,3 +12,9 @@ database:
 
 adminer:
 	docker run --name adminer -p 8081:8080 -d adminer
+
+rpc-desc:
+	grpcurl -plaintext -msg-template localhost:5000 describe .GetBookListResponse
+
+gen-proto:
+	protoc --proto_path=proto proto/*.proto --go_out=. --go-grpc_out=.

@@ -13,7 +13,7 @@ type Alimento struct {
 	Micros    []Ingrediente `json:"micros" gorm:"foreignKey:AlimentoId; constraint:OnDelete:CASCADE"`
 	Precio    int           `json:"precio" gorm:"index; not null"`
 	CreatedAt time.Time     `json:"created_at" gorm:"autoCreateTime"`
-	Owner     string        `json:"owner" gorm:"not null"`
+	Uid       string        `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (alm *Alimento) Migrate() {

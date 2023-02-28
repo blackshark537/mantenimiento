@@ -3,7 +3,6 @@ package cli
 import (
 	"errors"
 	"fmt"
-	"runtime"
 
 	"github.com/blackshark537/mantenimiento/src/config"
 	Core "github.com/blackshark537/mantenimiento/src/core"
@@ -126,9 +125,9 @@ var Commands []*cli.Command = []*cli.Command{
 
 func New() *cli.App {
 
-	AppName := color.MagentaString(fmt.Sprintf("Dataprod - Maintenance"))
-	AppArch := color.MagentaString(fmt.Sprintf("Core Arch: %v", runtime.GOARCH))
-	AppDesc := color.MagentaString("A simple CLI system to manage preventive maintenance")
+	AppName := color.MagentaString(fmt.Sprintf(config.AppName))
+	AppArch := color.MagentaString(fmt.Sprintf("Core Arch: %v", config.AppArch))
+	AppDesc := color.MagentaString(fmt.Sprintf(config.AppDesc))
 
 	website := color.CyanString("WEBSITE: https://dataprod.cloud")
 	support := color.GreenString("SUPPORT: support@dataprod.cloud")
@@ -197,6 +196,7 @@ func serverStart(ctx *cli.Context) error {
 	action := Core.Action{
 		OfType:  actions.ServerStart,
 		Payload: []byte(port),
+		Uid:     " ",
 	}
 	return action.Exec()
 }
@@ -227,6 +227,7 @@ func listTable(ctx *cli.Context) error {
 		return typesAvailable()
 	}
 	action.Payload = []byte(filter)
+	action.Uid = " "
 	return action.Exec()
 }
 
@@ -255,6 +256,7 @@ func createEntity(cli *cli.Context) error {
 		return typesAvailable()
 	}
 	action.Payload = []byte(data)
+	action.Uid = " "
 	err := action.Exec()
 	if err == nil {
 		fmt.Printf("%s creado con exito!\n", table)
@@ -287,6 +289,8 @@ func clearEntity(ctx *cli.Context) error {
 	default:
 		return typesAvailable()
 	}
+
+	action.Uid = " "
 	err := action.Exec()
 	if err == nil {
 		fmt.Printf("Todos los registros de la tabla %s, han sido borrados con exito!\n", table)

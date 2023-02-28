@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"encoding/json"
 	"errors"
 
 	entities "github.com/blackshark537/mantenimiento/src/core/Entities"
@@ -9,7 +10,7 @@ import (
 	"github.com/fatih/color"
 )
 
-func Exec(ofType int, payload []byte) error {
+func Exec(ofType int, payload []byte, Uid string) error {
 	switch ofType {
 	case actions.ServerStart:
 		return left.Serve(string(payload[:]))
@@ -21,7 +22,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateAreaType:
 		e := entities.Entity[entities.AreaType]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearAreaTypes:
@@ -35,7 +37,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateArea:
 		e := entities.Entity[entities.Area]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearAreas:
@@ -49,7 +52,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateEquipoType:
 		e := entities.Entity[entities.EquipoType]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearEquipoType:
@@ -63,7 +67,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateEquipo:
 		e := entities.Entity[entities.Equipo]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearEquipos:
@@ -77,7 +82,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateComponenteType:
 		e := entities.Entity[entities.ComponenteType]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearCompoenteTypes:
@@ -91,7 +97,8 @@ func Exec(ofType int, payload []byte) error {
 
 	case actions.CreateComponente:
 		e := entities.Entity[entities.Componente]{}
-		e.Data = payload
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
 		return e.Create()
 
 	case actions.ClearComponentes:

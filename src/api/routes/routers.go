@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"github.com/blackshark537/mantenimiento/src/api/auth"
 	"github.com/blackshark537/mantenimiento/src/api/handlers"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,7 +11,7 @@ func ForRoot(app *fiber.App) {
 		return c.SendString("Welcome to DataProd - Preventive Maintanence")
 	})
 
-	v1 := app.Group("/api/v1", auth.Authorize)
+	v1 := app.Group("/api/v1")
 
 	areas := v1.Group("/areas")
 	areas.Post("/", handlers.CreateArea)
@@ -50,7 +49,7 @@ func ForRoot(app *fiber.App) {
 	componentesType.Put("/:id", handlers.UpdateComponenteType)
 	componentesType.Delete("/:id", handlers.DeleteComponenteType)
 
-	alimentos := v1.Group("/alimentos")
+	/* alimentos := v1.Group("/alimentos")
 	alimentos.Post("/", handlers.CreateAlimneto)
 	alimentos.Get("/", handlers.ReadAlimneto)
 	alimentos.Put("/:id", handlers.UpdateAlimneto)
@@ -60,5 +59,5 @@ func ForRoot(app *fiber.App) {
 	ingredientes.Post("/", handlers.CreateIngrediente)
 	ingredientes.Get("/", handlers.ReadIngrediente)
 	ingredientes.Put("/:id", handlers.UpdateIngrediente)
-	ingredientes.Delete("/:id", handlers.DeleteIngrediente)
+	ingredientes.Delete("/:id", handlers.DeleteIngrediente) */
 }

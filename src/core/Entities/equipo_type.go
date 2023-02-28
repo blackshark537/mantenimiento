@@ -15,7 +15,7 @@ type EquipoType struct {
 	AreaId    uint      `json:"area_id" gorm:"not null"`
 	Equipos   []Equipo  `json:"equipos" gorm:"foreignKey:EquipoTypeId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner     string    `json:"owner" gorm:"not null"`
+	Uid       string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (equipo *EquipoType) Migrate() {

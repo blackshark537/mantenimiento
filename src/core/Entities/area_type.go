@@ -15,7 +15,7 @@ type AreaType struct {
 	EmpresaId uint      `json:"empresa_id" gorm:"not null"`
 	Areas     []Area    `json:"areas" gorm:"foreignKey:AreaTypeId; constraint:OnDelete:CASCADE"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner     string    `json:"owner" gorm:"not null"`
+	Uid       string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (atp *AreaType) Migrate() {
@@ -28,7 +28,7 @@ func (atp *AreaType) Migrate() {
 }
 
 func (area *AreaType) List(filter []byte) error {
-	t := new(Entity[AreaType])
+	t := Entity[AreaType]{}
 	t.Data = filter
 	err := t.GetAll().Preload("Areas").Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()

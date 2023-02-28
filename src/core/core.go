@@ -1,6 +1,8 @@
 package core
 
 import (
+	"errors"
+
 	Commands "github.com/blackshark537/mantenimiento/src/core/Commands"
 	entities "github.com/blackshark537/mantenimiento/src/core/Entities"
 	left_port "github.com/blackshark537/mantenimiento/src/core/Ports/Left"
@@ -16,6 +18,7 @@ type API interface {
 type Action struct {
 	OfType  int
 	Payload []byte
+	Uid     string
 }
 
 func InjectDatabase(db *gorm.DB) {
@@ -27,15 +30,21 @@ func InjectApi(api API) {
 }
 
 func (a *Action) Exec() error {
-	return Commands.Exec(a.OfType, a.Payload)
+	if a.Uid == "" {
+		return errors.New("Error field Uid is required")
+	}
+	return Commands.Exec(a.OfType, a.Payload, a.Uid)
 }
 
 func (a *Action) Query() (interface{}, error) {
-	return Query.Exec(a.OfType, a.Payload)
+	if a.Uid == "" {
+		return nil, errors.New("Error field Uid is required")
+	}
+	return Query.Exec(a.OfType, a.Payload, a.Uid)
 }
 
 func Migrate() {
-	usr := entities.User{}
+	/* usr := entities.User{}
 	usr.Migrate()
 
 	emp := entities.Empresa{}
@@ -45,7 +54,7 @@ func Migrate() {
 	geo.Migrate()
 
 	cto := entities.Contacto{}
-	cto.Migrate()
+	cto.Migrate() */
 
 	areaType := entities.AreaType{}
 	areaType.Migrate()
@@ -65,12 +74,12 @@ func Migrate() {
 	cmp := entities.Componente{}
 	cmp.Migrate()
 
-	alm := entities.Alimento{}
+	/* alm := entities.Alimento{}
 	alm.Migrate()
 
 	ing := entities.Ingrediente{}
 	ing.Migrate()
 
 	spl := entities.Suplidor{}
-	spl.Migrate()
+	spl.Migrate() */
 }

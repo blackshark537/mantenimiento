@@ -15,7 +15,7 @@ type ComponenteType struct {
 	EquipoId    uint         `json:"equipo_id" gorm:"not null"`
 	Componentes []Componente `json:"componentes" gorm:"foreignKey:ComponenteTypeId; not null; constraint:OnDelete:CASCADE"`
 	CreatedAt   time.Time    `json:"created_at" gorm:"autoCreateTime"`
-	Owner       string       `json:"owner" gorm:"not null"`
+	Uid         string       `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (cmp *ComponenteType) Migrate() {

@@ -18,8 +18,11 @@ func (api *api) ForRoot(port string) error {
 	app := fiber.New()
 	app.Use(recover.New())
 	app.Use(cors.New())
+
 	file := middlewares.FileLoggerForRoot(app)
 	defer file.Close()
+
+	app.Use(middlewares.IsAuth)
 	routes.ForRoot(app)
 	return app.Listen(":" + port)
 }

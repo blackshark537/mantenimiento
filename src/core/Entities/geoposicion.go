@@ -15,7 +15,7 @@ type Geoposicion struct {
 	Lat       float32   `json:"lat" gorm:"not null"`
 	Lng       float32   `json:"lng" gorm:"not null"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Owner     string    `json:"owner" gorm:"not null"`
+	Uid       string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (geo *Geoposicion) Migrate() {
