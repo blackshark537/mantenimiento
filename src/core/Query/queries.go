@@ -49,6 +49,18 @@ func getAll(ofType int, payload []byte, Uid string) (interface{}, error) {
 		err := e.GetAll().Where("uid = ?", Uid).Limit(25).Find(&e.Entities).Error
 		return e.Entities, err
 
+	case actions.GetAllContactos:
+		e := entities.Entity[entities.Contacto]{}
+		e.Data = payload
+		err := e.GetAll().Where("uid = ?", Uid).Limit(25).Find(&e.Entities).Error
+		return e.Entities, err
+
+	case actions.GetAllSuplidores:
+		e := entities.Entity[entities.Suplidor]{}
+		e.Data = payload
+		err := e.GetAll().Where("uid = ?", Uid).Preload("Componentes").Preload("Contactos").Limit(25).Find(&e.Entities).Error
+		return e.Entities, err
+
 	default:
 		return nil, errors.New("Error: Query no match!")
 	}

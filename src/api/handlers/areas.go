@@ -16,7 +16,7 @@ func CreateArea(c *fiber.Ctx) error {
 	}
 	err := a.Exec()
 	if err != nil {
-		return sendMsg(c, 500, fmt.Sprintf("[Error] Creating Area - %v\n", err))
+		return sendMsg(c, 500, err)
 	}
 
 	return sendMsg(c, 200, "done!")
@@ -31,7 +31,7 @@ func ReadArea(c *fiber.Ctx) error {
 	}
 	res, err := action.Query()
 	if err != nil {
-		return sendMsg(c, 500, fmt.Sprintf("[Error] Reading Areas - %v\n", err))
+		return sendMsg(c, 500, err)
 	}
 	return c.JSON(res)
 }
@@ -47,7 +47,7 @@ func CreateAreaType(c *fiber.Ctx) error {
 	}
 	err := a.Exec()
 	if err != nil {
-		return sendMsg(c, 500, fmt.Sprintf("[Error] Creating AreaType - %v\n", err))
+		return sendMsg(c, 500, err)
 	}
 
 	return sendMsg(c, 200, "done!")
@@ -62,7 +62,7 @@ func ReadAreaType(c *fiber.Ctx) error {
 	}
 	res, err := action.Query()
 	if err != nil {
-		return sendMsg(c, 500, fmt.Sprintf("[Error] Reading AreaTypes - %v\n", err))
+		return sendMsg(c, 500, err)
 	}
 	return c.JSON(res)
 }

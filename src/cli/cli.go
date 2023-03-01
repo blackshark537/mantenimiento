@@ -29,6 +29,8 @@ const (
 	equipos           = "equipos"
 	componentes_types = "componentes_types"
 	componentes       = "componentes"
+	contactos         = "contactos"
+	suplidores        = "suplidores"
 )
 
 var tables = []string{
@@ -38,6 +40,8 @@ var tables = []string{
 	equipos_types,
 	componentes_types,
 	componentes,
+	contactos,
+	suplidores,
 }
 
 var Commands []*cli.Command = []*cli.Command{
@@ -154,6 +158,8 @@ ENTITIES AVAILABLE:
 	- %s
 	- %s
 	- %s
+	- %s
+	- %s
 	
 	%s
 	
@@ -169,6 +175,8 @@ ENTITIES AVAILABLE:
 		equipos_types,
 		componentes,
 		componentes_types,
+		contactos,
+		suplidores,
 		website,
 		support,
 	)
@@ -223,6 +231,12 @@ func listTable(ctx *cli.Context) error {
 	case componentes:
 		action.OfType = actions.ListComponente
 		break
+	case contactos:
+		action.OfType = actions.ListContactos
+		break
+	case suplidores:
+		action.OfType = actions.ListSuplidores
+		break
 	default:
 		return typesAvailable()
 	}
@@ -251,6 +265,12 @@ func createEntity(cli *cli.Context) error {
 		break
 	case componentes:
 		action.OfType = actions.CreateComponente
+		break
+	case contactos:
+		action.OfType = actions.CreateContacto
+		break
+	case suplidores:
+		action.OfType = actions.CreateSuplidor
 		break
 	default:
 		return typesAvailable()
@@ -285,6 +305,12 @@ func clearEntity(ctx *cli.Context) error {
 		break
 	case componentes:
 		action.OfType = actions.ClearComponentes
+		break
+	case contactos:
+		action.OfType = actions.ClearContactos
+		break
+	case suplidores:
+		action.OfType = actions.ClearSuplidores
 		break
 	default:
 		return typesAvailable()

@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func sendMsg(c *fiber.Ctx, code int, msg string) error {
+func sendMsg(c *fiber.Ctx, code int, msg interface{}) error {
 	resp := map[string]any{
 		"code":    code,
 		"message": msg,

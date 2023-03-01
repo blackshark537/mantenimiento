@@ -18,7 +18,7 @@ func ReadEquipo(c *fiber.Ctx) error {
 	}
 	res, err := action.Query()
 	if err != nil {
-		return err
+		return sendMsg(c, 500, err)
 	}
 	return c.JSON(res)
 }
@@ -26,6 +26,7 @@ func UpdateEquipo(c *fiber.Ctx) error { return nil }
 func DeleteEquipo(c *fiber.Ctx) error { return nil }
 
 func CreateEquipoType(c *fiber.Ctx) error { return nil }
+
 func ReadEquipoType(c *fiber.Ctx) error {
 	filter := c.Query("filter")
 	action := Core.Action{
@@ -35,7 +36,7 @@ func ReadEquipoType(c *fiber.Ctx) error {
 	}
 	res, err := action.Query()
 	if err != nil {
-		return err
+		return sendMsg(c, 500, err)
 	}
 	return c.JSON(res)
 }

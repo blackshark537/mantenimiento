@@ -104,6 +104,36 @@ func Exec(ofType int, payload []byte, Uid string) error {
 	case actions.ClearComponentes:
 		e := entities.Entity[entities.Componente]{}
 		return e.Clear("componentes")
+
+	// Contacto
+	case actions.ListContactos:
+		e := entities.Contacto{}
+		return e.List(payload)
+
+	case actions.CreateContacto:
+		e := entities.Entity[entities.Contacto]{}
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
+		return e.Create()
+
+	case actions.ClearContactos:
+		e := entities.Entity[entities.Contacto]{}
+		return e.Clear("contactos")
+
+	// Suplidores
+	case actions.ListSuplidores:
+		e := entities.Suplidor{}
+		return e.List(payload)
+
+	case actions.CreateSuplidor:
+		e := entities.Entity[entities.Contacto]{}
+		json.Unmarshal(payload, &e.Entity)
+		e.Entity.Uid = Uid
+		return e.Create()
+
+	case actions.ClearSuplidores:
+		e := entities.Entity[entities.Contacto]{}
+		return e.Clear("suplidors")
 	default:
 		return errors.New(color.RedString("Error: Command not implemented"))
 	}

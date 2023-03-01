@@ -1,17 +1,20 @@
 package routes
 
 import (
+	"fmt"
+
 	"github.com/blackshark537/mantenimiento/src/api/handlers"
+	"github.com/blackshark537/mantenimiento/src/config"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func ForRoot(app *fiber.App) {
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to DataProd - Preventive Maintanence")
+		return c.SendString(fmt.Sprintf("%s - %s", config.AppName, config.AppDesc))
 	})
 
-	v1 := app.Group("/api/v1")
+	v1 := app.Group("/api/v1/mantenimiento")
 
 	areas := v1.Group("/areas")
 	areas.Post("/", handlers.CreateArea)
@@ -49,15 +52,15 @@ func ForRoot(app *fiber.App) {
 	componentesType.Put("/:id", handlers.UpdateComponenteType)
 	componentesType.Delete("/:id", handlers.DeleteComponenteType)
 
-	/* alimentos := v1.Group("/alimentos")
-	alimentos.Post("/", handlers.CreateAlimneto)
-	alimentos.Get("/", handlers.ReadAlimneto)
-	alimentos.Put("/:id", handlers.UpdateAlimneto)
-	alimentos.Delete("/:id", handlers.DeleteAlimneto)
+	suplidores := v1.Group("suplidores")
+	suplidores.Post("/", handlers.CreateSuplidor)
+	suplidores.Get("/", handlers.ReadSuplidor)
+	suplidores.Put("/:id", handlers.UpdateSuplidor)
+	suplidores.Delete("/:id", handlers.DeleteSuplidor)
 
-	ingredientes := v1.Group("/ingredientes")
-	ingredientes.Post("/", handlers.CreateIngrediente)
-	ingredientes.Get("/", handlers.ReadIngrediente)
-	ingredientes.Put("/:id", handlers.UpdateIngrediente)
-	ingredientes.Delete("/:id", handlers.DeleteIngrediente) */
+	contactos := v1.Group("contactos")
+	contactos.Post("/", handlers.CreateContacto)
+	contactos.Get("/", handlers.ReadContacto)
+	contactos.Put("/:id", handlers.UpdateContacto)
+	contactos.Delete("/:id", handlers.DeleteContacto)
 }

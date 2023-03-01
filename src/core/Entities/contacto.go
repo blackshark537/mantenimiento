@@ -18,12 +18,12 @@ const (
 )
 
 type Contacto struct {
-	Id        uint      `json:"id" gorm:"primary_key"`
-	EmpresaId uint      `json:"empresa_id" gorm:"not null"`
-	Numero    string    `json:"numero" gorm:"index; not null"`
-	Tipo      string    `json:"tipo" gorm:"type:phone_type; not null; default:CASA"`
-	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-	Uid       string    `json:"uid,omitempty" gorm:"index; not null"`
+	Id         uint      `json:"id" gorm:"primary_key"`
+	SuplidorId uint      `json:"suplidor_id" gorm:"not null"`
+	Numero     string    `json:"numero" gorm:"index; not null"`
+	Tipo       string    `json:"tipo" gorm:"type:phone_type; not null; default:CASA"`
+	CreatedAt  time.Time `json:"created_at" gorm:"autoCreateTime"`
+	Uid        string    `json:"uid,omitempty" gorm:"index; not null"`
 }
 
 func (cto *Contacto) Migrate() {
@@ -50,11 +50,11 @@ func (cto *Contacto) List(filter []byte) error {
 	err := t.GetAll().Limit(25).Find(&t.Entities).Error
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
-	tbl := table.New("ID", "EmpresaId", "Teléfono", "Tipo")
+	tbl := table.New("ID", "Suplidor Id", "Teléfono", "Tipo")
 	fmt.Printf("%s %v Items\n", color.MagentaString("[Results]:"), len(t.Entities))
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 	for _, el := range t.Entities {
-		tbl.AddRow(el.Id, el.EmpresaId, el.Numero, el.Tipo)
+		tbl.AddRow(el.Id, el.SuplidorId, el.Numero, el.Tipo)
 	}
 	tbl.Print()
 	return err

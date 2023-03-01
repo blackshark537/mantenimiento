@@ -3,7 +3,7 @@ package actions
 const (
 	ServerStart = iota
 
-	GetAllAreaType = iota
+	GetAllAreaType = iota + 1
 	GetAreaType
 	ListAreaType
 	CreateAreaType
@@ -11,7 +11,7 @@ const (
 	DeleteAreaType
 	ClearAreaTypes
 
-	GetAllAreas = iota
+	GetAllAreas = iota + 1
 	GetArea
 	ListArea
 	CreateArea
@@ -19,7 +19,7 @@ const (
 	DeleteArea
 	ClearAreas
 
-	GetAllEquipoType = iota
+	GetAllEquipoType = iota + 1
 	GetEquipoType
 	ListEquipoType
 	CreateEquipoType
@@ -27,7 +27,7 @@ const (
 	DeleteEquipoType
 	ClearEquipoType
 
-	GetAllEquipos = iota
+	GetAllEquipos = iota + 1
 	GetEquipo
 	ListEquipo
 	CreateEquipo
@@ -35,7 +35,7 @@ const (
 	DeleteEquipo
 	ClearEquipos
 
-	GetAllComponentesType = iota
+	GetAllComponentesType = iota + 1
 	GetComponenteType
 	ListComponenteType
 	CreateComponenteType
@@ -43,11 +43,27 @@ const (
 	DeleteComponenteType
 	ClearCompoenteTypes
 
-	GetAllComponentes = iota
+	GetAllComponentes = iota + 1
 	GetComponente
 	ListComponente
 	CreateComponente
 	UpdateComponente
 	DeleteComponente
 	ClearComponentes
+
+	GetAllSuplidores = iota + 1
+	GetSuplidor
+	ListSuplidores
+	CreateSuplidor
+	UpdateSuplidor
+	DeleteSuplidor
+	ClearSuplidores
+
+	GetAllContactos = iota + 1
+	GetContacto
+	ListContactos
+	CreateContacto
+	UpdateContacto
+	DeleteContacto
+	ClearContactos
 )

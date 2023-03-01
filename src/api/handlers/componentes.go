@@ -18,7 +18,7 @@ func ReadComponente(c *fiber.Ctx) error {
 	}
 	res, err := action.Query()
 	if err != nil {
-		return err
+		return sendMsg(c, 500, err)
 	}
 	return c.JSON(res)
 }

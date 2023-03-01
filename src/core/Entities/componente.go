@@ -17,6 +17,7 @@ type Componente struct {
 	Descripcion      string    `json:"descripcion"`
 	VidaUtil         int       `json:"vida_util" gorm:"not null"`
 	ComponenteTypeId uint      `json:"componente_type_id" gorm:"not null"`
+	SuplidorId       uint      `json:"suplidor_id" gorm:"not null"`
 	CreatedAt        time.Time `json:"created_at" gorm:"autoCreateTime"`
 	Uid              string    `json:"uid,omitempty" gorm:"index; not null"`
 }
